@@ -4,8 +4,11 @@ import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * @author huyuanxin
@@ -18,17 +21,17 @@ public class CrawlerUtil {
      * @return 疾病名称
      */
     public static List<String> getNameList(String name) {
-        int id=0;
-        if("疾病".equals(name)){
-            id=117;
-        }else if("药物".equals(name)){
-            id=96;
-        }else if ("症状".equals(name)){
-            id=29;
-        }else if("诊疗".equals(name)){
-            id=29;
+        int id = 0;
+        if ("疾病".equals(name)) {
+            id = 117;
+        } else if ("药物".equals(name)) {
+            id = 96;
+        } else if ("症状".equals(name)) {
+            id = 29;
+        } else if ("诊疗".equals(name)) {
+            id = 29;
         }
-        List<String> diseaseNameList = new ArrayList<>();
+        List<String> nameList = new ArrayList<>();
         String url = "https://zstp.pcl.ac.cn:8002/load_tree/" + name;
         String response = HttpUtil.get(url);
         JSONObject json = JSONObject.parseObject(response);
@@ -38,10 +41,10 @@ public class CrawlerUtil {
             JSONObject temp = (JSONObject) obj;
             if (temp.getInteger("id") > id) {
                 String diseaseName = temp.getString("name");
-                diseaseNameList.add(diseaseName);
+                nameList.add(diseaseName);
             }
         }
-        return diseaseNameList;
+        return delRepeat(nameList);
     }
 
     /**
@@ -228,5 +231,56 @@ public class CrawlerUtil {
         }
         return new ArrayList<>();
 
+    }
+
+
+
+    public static List<String> delRepeat(List<String> list) {
+        return new ArrayList<>(new TreeSet<>(list));
+    }
+
+
+    public static List<String> getDiseaseJsonComponent(String type, String key) {
+        String file = "src\\main\\json\\" + type + "\\" + type + ".json";
+        List<String> result = new ArrayList<>();
+        JSONObject json = readJsonFile(file);
+        assert json != null;
+        JSONArray array = json.getJSONArray(type);
+        for (Object o : array
+        ) {
+            JSONObject temp = (JSONObject) o;
+            JSONArray tempArray = temp.getJSONArray(key);
+            if (tempArray != null) {
+                for (Object s : tempArray) {
+                    String str = (String) s;
+                    if (!str.contains("%") && !str.contains(".")) {
+                        result.add(str);
+                    }
+                }
+            }
+        }
+        return delRepeat(result);
+    }
+
+    public static JSONObject readJsonFile(String fileName) {
+        String jsonStr = "";
+        try {
+            File jsonFile = new File(fileName);
+            FileReader fileReader = new FileReader(jsonFile);
+
+            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "utf-8");
+            int ch = 0;
+            StringBuffer sb = new StringBuffer();
+            while ((ch = reader.read()) != -1) {
+                sb.append((char) ch);
+            }
+            fileReader.close();
+            reader.close();
+            jsonStr = sb.toString();
+            return JSONObject.parseObject(jsonStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

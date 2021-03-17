@@ -1,16 +1,16 @@
-package yuanxin.knowledge.crawler.service;
+package yuanxin.knowledge.crawler.repository;
 
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 
 /**
  * @author huyuanxin
  */
-@Service
-public interface DiseaseService extends Neo4jRepository<Object, Integer> {
+@Repository
+public interface DiseaseRepository extends Neo4jRepository<Object, Integer> {
 
     /**
      * 初始化Disease,设置Disease的name为唯一值
@@ -33,5 +33,5 @@ public interface DiseaseService extends Neo4jRepository<Object, Integer> {
      * @return 存在的数量
      */
     @Query("match(d:Disease) where d.name=$diseaseName return COUNT(*)")
-    long exists(@Param("diseaseName") String diseaseName);
+    long isExits(@Param("diseaseName") String diseaseName);
 }

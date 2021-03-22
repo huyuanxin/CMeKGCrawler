@@ -47,7 +47,15 @@ public class ImportBackupUtil {
     final PreventionRepository preventionRepository;
     final SpreadWayRepository spreadWayRepository;
 
-
+    //药物
+    final TypeRepository typeRepository;
+    final PrecautionsRepository precautionsRepository;
+    final ContraindicationsRepository contraindicationsRepository;
+    final SubjectRepository subjectRepository;
+    final IngredientsRepository ingredientsRepository;
+    final OTCRepository OTCRepository;
+    final AdverseReactionsRepository adverseReactionsRepository;
+    final IndicationsRepository indicationsRepository;
 
 
     public ImportBackupUtil(DiseaseRepository diseaseRepository,
@@ -81,7 +89,16 @@ public class ImportBackupUtil {
                             StageRepository stageRepository,
                             TreatmentProgramsRepository treatmentProgramsRepository,
                             PreventionRepository preventionRepository,
-                            SpreadWayRepository spreadWayRepository) {
+                            SpreadWayRepository spreadWayRepository,
+                            TypeRepository typeRepository,
+                            PrecautionsRepository precautionsRepository,
+                            ContraindicationsRepository contraindicationsRepository,
+                            SubjectRepository subjectRepository,
+                            IngredientsRepository ingredientsRepository,
+                            OTCRepository OTCRepository,
+                            AdverseReactionsRepository adverseReactionsRepository,
+                            IndicationsRepository indicationsRepository) {
+        //疾病
         this.diseaseRepository = diseaseRepository;
         this.entityRepository = entityRepository;
         this.symptomRepository = symptomRepository;
@@ -104,18 +121,28 @@ public class ImportBackupUtil {
         this.operationRepository = operationRepository;
         this.pathogenesisRepository = pathogenesisRepository;
 
+        //症状
         this.checkRepository = checkRepository;
         this.relatedDiseaseRepository = relatedDiseaseRepository;
         this.relatedSymptomRepository = relatedSymptomRepository;
         this.infectiousRepository = infectiousRepository;
         this.relatedToRepository = relatedToRepository;
-
         this.symptomAndSignRepository = symptomAndSignRepository;
         this.auxiliaryExaminationRepository = auxiliaryExaminationRepository;
         this.stageRepository = stageRepository;
         this.treatmentProgramsRepository = treatmentProgramsRepository;
         this.preventionRepository = preventionRepository;
         this.spreadWayRepository = spreadWayRepository;
+
+        //药物
+        this.typeRepository = typeRepository;
+        this.precautionsRepository = precautionsRepository;
+        this.contraindicationsRepository = contraindicationsRepository;
+        this.subjectRepository = subjectRepository;
+        this.ingredientsRepository = ingredientsRepository;
+        this.OTCRepository = OTCRepository;
+        this.adverseReactionsRepository = adverseReactionsRepository;
+        this.indicationsRepository = indicationsRepository;
     }
 
     //疾病
@@ -377,6 +404,72 @@ public class ImportBackupUtil {
         }
     }
 
+    //药物
+    void initType(){
+        try {
+            typeRepository.initType();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+    void initPrecautions(){
+        try {
+            precautionsRepository.initPrecautions();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+    void initContraindications(){
+        try {
+            contraindicationsRepository.initContraindications();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+    void initSubject(){
+        try {
+            subjectRepository.initSubject();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+    void initIngredients(){
+        try {
+            ingredientsRepository.initIngredients();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+    void initOTC(){
+        try {
+            OTCRepository.initOTC();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+    void initAdverseReactions(){
+        try {
+            adverseReactionsRepository.initAdverseReactions();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+    void initIndications(){
+        try {
+            indicationsRepository.initIndications();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
+
+
 
     public void init() {
         //疾病
@@ -414,6 +507,16 @@ public class ImportBackupUtil {
         initTreatmentPrograms();
         initPrevention();
         initSpreadWay();
+
+        //药物
+        initType();
+        initPrecautions();
+        initContraindications();
+        initSubject();
+        initIngredients();
+        initOTC();
+        initAdverseReactions();
+        initIndications();
     }
 
     //疾病
@@ -794,6 +897,7 @@ public class ImportBackupUtil {
         }
     }
 
+
     //症状
     public void insertAllCheck(){
         List<String> checkNameList = CrawlerUtil.getDiseaseJsonComponent("症状", "检查");
@@ -1116,6 +1220,140 @@ public class ImportBackupUtil {
         }
     }
 
+
+    //药物
+    public void insertAllType(){
+        List<String> typeNameList = CrawlerUtil.getDiseaseJsonComponent("药物", "分类");
+        for (String type: typeNameList
+        ) {
+            if (typeRepository.isExits(type) < 1) {
+                try {
+                    typeRepository.insertType(type);
+                    System.out.println("插入:" + type + "进入neo4j的Check");
+                } catch (Exception e) {
+                    System.out.println("插入失败");
+                }
+            }
+        }
+    }
+
+    public void inserAllPrecautions(){
+        List<String> precautionsNameList = CrawlerUtil.getDiseaseJsonComponent("药物", "注意事项");
+        for (String precautions : precautionsNameList
+        ) {
+            if (precautionsRepository.isExits(precautions) < 1) {
+                try {
+                    precautionsRepository.insertPrecautions(precautions);
+                    System.out.println("插入:" + precautions + "进入neo4j的Check");
+                } catch (Exception e) {
+                    System.out.println("插入失败");
+                }
+            }
+        }
+    }
+
+    void insertAllContraindications(){
+        List<String> contraindicationsNameList = CrawlerUtil.getDiseaseJsonComponent("症状", "禁忌证");
+        for (String contraindications : contraindicationsNameList
+        ) {
+            if (diseaseRepository.isExits(contraindications) < 1) {
+                if (symptomRepository.isExits(contraindications) < 1) {
+                    if (entityRepository.isExits(contraindications) < 1) {
+                        try {
+                            contraindicationsRepository.insertContraindications(contraindications);
+                            System.out.println("插入:" + contraindications + "进入neo4j的Department");
+                        } catch (Exception e) {
+                            System.out.println("插入失败");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void insertAllSublect(){
+        List<String> subjectNameList = CrawlerUtil.getDiseaseJsonComponent("药物", "所属科目");
+        for (String precautions : subjectNameList
+        ) {
+            if (subjectRepository.isExits(precautions) < 1) {
+                try {
+                    subjectRepository.insertSubject(precautions);
+                    System.out.println("插入:" + precautions + "进入neo4j的Check");
+                } catch (Exception e) {
+                    System.out.println("插入失败");
+                }
+            }
+        }
+    }
+
+    void insertAllIngredients(){
+        List<String> ingredientsNameList = CrawlerUtil.getDiseaseJsonComponent("药物", "成份");
+        for (String ingredients : ingredientsNameList
+        ){
+            if (ingredientsRepository.isExits(ingredients) < 1) {
+                try {
+                    ingredientsRepository.insertIngredients(ingredients);
+                    System.out.println("插入:" + ingredients + "进入neo4j的Cause");
+                } catch (Exception e) {
+                    System.out.println("插入失败");
+                }
+            }
+        }
+    }
+
+    void insertAllOTC(){
+        List<String> OTCNameList = CrawlerUtil.getDiseaseJsonComponent("药物", "OTC类型");
+        for (String OTC : OTCNameList
+        ){
+            if (OTCRepository.isExits(OTC) < 1) {
+                try {
+                    OTCRepository.insertOTC(OTC);
+                    System.out.println("插入:" + OTC + "进入neo4j的Cause");
+                } catch (Exception e) {
+                    System.out.println("插入失败");
+                }
+            }
+        }
+    }
+
+    void insertAllAdverseReactions(){
+        List<String> adverseReactionsNameList = CrawlerUtil.getDiseaseJsonComponent("药物", "不良反应");
+        for (String adverseReactions : adverseReactionsNameList
+        ){
+            if (diseaseRepository.isExits(adverseReactions) < 1) {
+                if (symptomRepository.isExits(adverseReactions) < 1) {
+                    if (entityRepository.isExits(adverseReactions) < 1) {
+                        try {
+                            adverseReactionsRepository.insertAdverseReactions(adverseReactions);
+                            System.out.println("插入:" + adverseReactions + "进入neo4j的Cause");
+                        } catch (Exception e) {
+                            System.out.println("插入失败");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    void insertAllIndications(){
+        List<String> indicationsNameList = CrawlerUtil.getDiseaseJsonComponent("药物", "适应症");
+        for (String indications : indicationsNameList
+        ){
+            if (diseaseRepository.isExits(indications) < 1) {
+                if (symptomRepository.isExits(indications) < 1) {
+                    if (entityRepository.isExits(indications) < 1) {
+                        try {
+                            indicationsRepository.insertIndications(indications);
+                            System.out.println("插入:" + indications + "进入neo4j的Cause");
+                        } catch (Exception e) {
+                            System.out.println("插入失败");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public void insertAll() {
         //疾病
         insertAllDisease();
@@ -1162,6 +1400,16 @@ public class ImportBackupUtil {
         insertAllTreatmentProgramsInSymptom();
         insertAllPrevention();
         insertAllSpreadWay();
+
+        //药物
+        insertAllType();
+        inserAllPrecautions();
+        insertAllContraindications();
+        insertAllSublect();
+        insertAllIngredients();
+        insertAllOTC();
+        insertAllAdverseReactions();
+        insertAllIndications();
     }
 
 }

@@ -12,10 +12,9 @@ import java.util.List;
 @SpringBootTest
 class KnowledgeCrawlerApplicationTests {
 
-//    @Autowired
-//    ImportUtil importUtil;
     @Autowired
     ImportBackupUtil importBackupUtil;
+    //    ImportUtil importUtil;
 
 //    @Test
 //    void init() {
@@ -28,11 +27,15 @@ class KnowledgeCrawlerApplicationTests {
 //        importUtil.insertAll();
 //    }
 //
+//
 //    @Test
 //    void test() {
 //        List<String> result = CrawlerUtil.getDiseaseJsonComponent("疾病", "并发症");
 //        result.forEach(System.out::println);
 //    }
+
+
+
 
     @Test
     void insertAllComplication() {

@@ -22,7 +22,7 @@ public interface EntityRepository extends Neo4jRepository<Object, Integer> {
      * @return 个数
      */
     @Query("match(c:Complication) where c.name=$complicationName return COUNT(*)")
-    long complicationIsExits(@Param("complicationName") String complicationName);
+    long isExits(@Param("complicationName") String complicationName);
 
     /**
      * 插入并发症
@@ -30,6 +30,6 @@ public interface EntityRepository extends Neo4jRepository<Object, Integer> {
      * @param complicationName 并发症的名字
      * @return 结果
      */
-    @Query("CREATE (c:Complication) SET c.name= complicationName")
+    @Query("CREATE (c:Complication) SET c.name= $complicationName")
     void insertComplication(@Param("complicationName") String complicationName);
 }

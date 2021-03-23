@@ -57,6 +57,9 @@ public class ImportBackupUtil {
     final AdverseReactionsRepository adverseReactionsRepository;
     final IndicationsRepository indicationsRepository;
 
+    //诊疗
+    final CheckSubjectRepository checkSubjectRepository;
+
 
     public ImportBackupUtil(DiseaseRepository diseaseRepository,
                             SymptomRepository symptomRepository,
@@ -97,7 +100,8 @@ public class ImportBackupUtil {
                             IngredientsRepository ingredientsRepository,
                             OTCRepository OTCRepository,
                             AdverseReactionsRepository adverseReactionsRepository,
-                            IndicationsRepository indicationsRepository) {
+                            IndicationsRepository indicationsRepository,
+                            CheckSubjectRepository checkSubjectRepository) {
         //疾病
         this.diseaseRepository = diseaseRepository;
         this.entityRepository = entityRepository;
@@ -143,6 +147,9 @@ public class ImportBackupUtil {
         this.OTCRepository = OTCRepository;
         this.adverseReactionsRepository = adverseReactionsRepository;
         this.indicationsRepository = indicationsRepository;
+
+        //诊疗
+        this.checkSubjectRepository = checkSubjectRepository;
     }
 
     //疾病
@@ -469,6 +476,14 @@ public class ImportBackupUtil {
         }
     }
 
+    //诊疗
+    void initCheckSubject(){
+        try {
+            checkSubjectRepository.initCheckSubject();
+        } catch (Exception e) {
+            System.out.println("初始化失败，可能是约束已经存在");
+        }
+    }
 
 
     public void init() {
@@ -517,6 +532,9 @@ public class ImportBackupUtil {
         initOTC();
         initAdverseReactions();
         initIndications();
+
+        //诊疗
+        initCheckSubject();
     }
 
     //疾病
@@ -897,6 +915,40 @@ public class ImportBackupUtil {
         }
     }
 
+    void insertRelatedDiseaseInDisease(){
+        List<String> relatedDiseaseNameList = CrawlerUtil.getDiseaseJsonComponent("疾病", "相关疾病");
+        for (String relatedDisease : relatedDiseaseNameList
+        ) {
+            if (diseaseRepository.isExits(relatedDisease) < 1) {
+                if (relatedDiseaseRepository.isExits(relatedDisease) < 1) {
+                    try {
+                        relatedDiseaseRepository.insertRelatedDisease(relatedDisease);
+                        System.out.println("插入:" + relatedDisease + "进入neo4j的RelatedDisease");
+                    } catch (Exception e) {
+                        System.out.println("插入失败");
+                    }
+                }
+            }
+        }
+    }
+
+    void insertRelatedSymptomInDisease(){
+        List<String> relatedSymptomNameList = CrawlerUtil.getDiseaseJsonComponent("疾病", "相关疾病");
+        for (String relatedSymptom : relatedSymptomNameList
+        ) {
+            if (symptomRepository.isExits(relatedSymptom) < 1) {
+                if (relatedSymptomRepository.isExits(relatedSymptom) < 1) {
+                    try {
+                        relatedSymptomRepository.insertRelatedSymptom(relatedSymptom);
+                        System.out.println("插入:" + relatedSymptom + "进入neo4j的RelatedSymptom");
+                    } catch (Exception e) {
+                        System.out.println("插入失败");
+                    }
+                }
+            }
+        }
+    }
+
 
     //症状
     public void insertAllCheck(){
@@ -949,31 +1001,35 @@ public class ImportBackupUtil {
         }
     }
 
-    void insertRelatedDiseaseRepository(){
+    void insertRelatedDiseaseInSymptom(){
         List<String> relatedDiseaseNameList = CrawlerUtil.getDiseaseJsonComponent("症状", "相关疾病");
         for (String relatedDisease : relatedDiseaseNameList
         ) {
             if (diseaseRepository.isExits(relatedDisease) < 1) {
-                try {
-                    relatedDiseaseRepository.insertRelatedDisease(relatedDisease);
-                    System.out.println("插入:" + relatedDisease + "进入neo4j的RelatedDisease");
-                } catch (Exception e) {
-                    System.out.println("插入失败");
+                if (relatedDiseaseRepository.isExits(relatedDisease) < 1) {
+                    try {
+                        relatedDiseaseRepository.insertRelatedDisease(relatedDisease);
+                        System.out.println("插入:" + relatedDisease + "进入neo4j的RelatedDisease");
+                    } catch (Exception e) {
+                        System.out.println("插入失败");
+                    }
                 }
             }
         }
     }
 
-    void insertRelatedSymptomRepository(){
+    void insertRelatedSymptomInSymptom(){
         List<String> relatedSymptomNameList = CrawlerUtil.getDiseaseJsonComponent("症状", "相关疾病");
         for (String relatedSymptom : relatedSymptomNameList
         ) {
             if (symptomRepository.isExits(relatedSymptom) < 1) {
-                try {
-                    relatedSymptomRepository.insertRelatedSymptom(relatedSymptom);
-                    System.out.println("插入:" + relatedSymptom + "进入neo4j的RelatedSymptom");
-                } catch (Exception e) {
-                    System.out.println("插入失败");
+                if (relatedSymptomRepository.isExits(relatedSymptom) < 1) {
+                    try {
+                        relatedSymptomRepository.insertRelatedSymptom(relatedSymptom);
+                        System.out.println("插入:" + relatedSymptom + "进入neo4j的RelatedSymptom");
+                    } catch (Exception e) {
+                        System.out.println("插入失败");
+                    }
                 }
             }
         }
@@ -1354,6 +1410,58 @@ public class ImportBackupUtil {
         }
     }
 
+    //诊疗
+    void insertRelatedDiseaseInTreatment(){
+        List<String> relatedDiseaseNameList = CrawlerUtil.getDiseaseJsonComponent("诊疗", "相关疾病");
+        for (String relatedDisease : relatedDiseaseNameList
+        ) {
+            if (diseaseRepository.isExits(relatedDisease) < 1) {
+                if (relatedDiseaseRepository.isExits(relatedDisease) < 1) {
+                    try {
+                        relatedDiseaseRepository.insertRelatedDisease(relatedDisease);
+                        System.out.println("插入:" + relatedDisease + "进入neo4j的RelatedDisease");
+                    } catch (Exception e) {
+                        System.out.println("插入失败");
+                    }
+                }
+            }
+        }
+    }
+
+    void insertRelatedSymptomInTreatment(){
+        List<String> relatedSymptomNameList = CrawlerUtil.getDiseaseJsonComponent("诊疗", "相关疾病");
+        for (String relatedSymptom : relatedSymptomNameList
+        ) {
+            if (symptomRepository.isExits(relatedSymptom) < 1) {
+                if (relatedSymptomRepository.isExits(relatedSymptom) < 1) {
+                    try {
+                        relatedSymptomRepository.insertRelatedSymptom(relatedSymptom);
+                        System.out.println("插入:" + relatedSymptom + "进入neo4j的RelatedSymptom");
+                    } catch (Exception e) {
+                        System.out.println("插入失败");
+                    }
+                }
+            }
+        }
+    }
+
+    void insertCheckSubject(){
+        List<String> checkSubjectNameList = CrawlerUtil.getDiseaseJsonComponent("诊疗", "相关疾病");
+        for (String checkSubject : checkSubjectNameList
+        ) {
+            if (checkRepository.isExits(checkSubject) < 1) {
+                if (auxiliaryExaminationRepository.isExits(checkSubject) < 1) {
+                    try {
+                        relatedSymptomRepository.insertRelatedSymptom(checkSubject);
+                        System.out.println("插入:" + checkSubject + "进入neo4j的RelatedSymptom");
+                    } catch (Exception e) {
+                        System.out.println("插入失败");
+                    }
+                }
+            }
+        }
+    }
+
     public void insertAll() {
         //疾病
         insertAllDisease();
@@ -1379,13 +1487,15 @@ public class ImportBackupUtil {
         insertAllPathogenesis();
         insertAllSymptomAndSignInDisease();
         insertAllTreatmentProgramsInDisease();
+        insertRelatedDiseaseInDisease();
+        insertRelatedSymptomInDisease();
 
         //症状
         insertAllCheck();
         insertAllDepartmentInSymptom();
         insertAllDiseaseSiteInSymptom();
-        insertRelatedDiseaseRepository();
-        insertRelatedSymptomRepository();
+        insertRelatedDiseaseInSymptom();
+        insertRelatedSymptomInSymptom();
         insertAllPathologicalTypeInSymptom();
         insertAllAdjuvantTherapyInSymptom();
         insertAllInfectious();
@@ -1410,6 +1520,11 @@ public class ImportBackupUtil {
         insertAllOTC();
         insertAllAdverseReactions();
         insertAllIndications();
+
+        //诊疗
+        insertRelatedDiseaseInTreatment();
+        insertRelatedSymptomInTreatment();
+        insertRelatedSymptomInTreatment();
     }
 
 }

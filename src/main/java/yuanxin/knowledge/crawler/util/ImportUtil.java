@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import yuanxin.knowledge.crawler.repository.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -162,13 +163,19 @@ public class ImportUtil {
         insertAllComplication();
     }
 
-    void foo() {
-        String diseaseName = "";
-        String name = "";
+    void foo(String diseaseName, String name) {
         if (diseaseRepository.isExits(name) > 0) {
             relationRepository.insertResComplication(diseaseName, name);
         } else if (symptomRepository.isExits(name) > 0) {
             // another insert function
+        }
+    }
+
+    void bar() {
+        HashMap<String, List<String>> map = new CrawlerUtil().getDiseaseJsonComponentToHashMap("疾病", "并发症");
+        for (String key : map.keySet()
+        ) {
+            map.get(key).forEach(it -> foo(key, it));
         }
     }
 }

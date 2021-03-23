@@ -1452,8 +1452,8 @@ public class ImportBackupUtil {
             if (checkRepository.isExits(checkSubject) < 1) {
                 if (auxiliaryExaminationRepository.isExits(checkSubject) < 1) {
                     try {
-                        relatedSymptomRepository.insertRelatedSymptom(checkSubject);
-                        System.out.println("插入:" + checkSubject + "进入neo4j的RelatedSymptom");
+                        checkSubjectRepository.insertCheckSubject(checkSubject);
+                        System.out.println("插入:" + checkSubject + "进入neo4j的CheckSubject");
                     } catch (Exception e) {
                         System.out.println("插入失败");
                     }
@@ -1524,7 +1524,7 @@ public class ImportBackupUtil {
         //诊疗
         insertRelatedDiseaseInTreatment();
         insertRelatedSymptomInTreatment();
-        insertRelatedSymptomInTreatment();
+        insertCheckSubject();
     }
 
 }

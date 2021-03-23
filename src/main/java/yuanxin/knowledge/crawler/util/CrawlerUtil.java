@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author huyuanxin
@@ -234,7 +231,6 @@ public class CrawlerUtil {
     }
 
 
-
     public static List<String> delRepeat(List<String> list) {
         return new ArrayList<>(new TreeSet<>(list));
     }
@@ -282,5 +278,32 @@ public class CrawlerUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * @param type 类型
+     * @param key  属性
+     * @return <"药名",List<"属性列">>
+     */
+    public HashMap<String, List<String>> getDiseaseJsonComponentToHashMap(String type, String key) {
+        String file = "src\\main\\json\\" + type + "\\" + type + ".json";
+        HashMap<String, List<String>> result = new HashMap<>();
+        JSONObject json = readJsonFile(file);
+        assert json != null;
+        JSONArray array = json.getJSONArray(type);
+        for (Object o : array
+        ) {
+            List<String> list = new ArrayList<>();
+            JSONObject temp = (JSONObject) o;
+            JSONArray tempArray = temp.getJSONArray(key);
+            if (tempArray != null) {
+                for (Object s : tempArray) {
+                    String str = (String) s;
+                    list.add(str);
+                }
+                result.put(temp.getString("名称"), list);
+            }
+        }
+        return result;
     }
 }

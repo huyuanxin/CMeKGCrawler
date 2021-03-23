@@ -17,14 +17,16 @@ public class ImportUtil {
     final SymptomRepository symptomRepository;
     final TreatmentRepository treatmentRepository;
     final EntityRepository entityRepository;
+    final RelationRepository relationRepository;
 
     @Autowired
-    public ImportUtil(DiseaseRepository diseaseRepository, DrugRepository drugRepository, SymptomRepository symptomRepository, TreatmentRepository treatmentRepository, EntityRepository entityRepository) {
+    public ImportUtil(DiseaseRepository diseaseRepository, DrugRepository drugRepository, SymptomRepository symptomRepository, TreatmentRepository treatmentRepository, EntityRepository entityRepository, RelationRepository relationRepository) {
         this.diseaseRepository = diseaseRepository;
         this.drugRepository = drugRepository;
         this.symptomRepository = symptomRepository;
         this.treatmentRepository = treatmentRepository;
         this.entityRepository = entityRepository;
+        this.relationRepository = relationRepository;
     }
 
     void initComplication() {
@@ -160,5 +162,13 @@ public class ImportUtil {
         insertAllComplication();
     }
 
-
+    void foo() {
+        String diseaseName = "";
+        String name = "";
+        if (diseaseRepository.isExits(name) > 0) {
+            relationRepository.insertResComplication(diseaseName, name);
+        } else if (symptomRepository.isExits(name) > 0) {
+            // another insert function
+        }
+    }
 }

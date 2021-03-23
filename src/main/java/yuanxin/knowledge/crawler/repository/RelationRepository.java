@@ -14,7 +14,7 @@ public interface RelationRepository extends Neo4jRepository<Object, Integer> {
      * @param diseaseName      疾病名
      * @param complicationName 并发症名
      */
-    @Query("MATCH (D:Disease) WHERE D.name=$diseaseName CREATE (D)-[r:并发症]->(C:Complication{name:$complicationName}) ")
+    @Query("Match(d:Disease),(c:Complication) where d.name=$diseaseName AND c.name=$complicationName Create (d)-[complication]->(c)")
     void insertResComplication(@Param("diseaseName") String diseaseName, @Param("complicationName") String complicationName);
 
 

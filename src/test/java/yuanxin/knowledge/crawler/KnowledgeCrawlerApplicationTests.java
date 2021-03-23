@@ -3,11 +3,7 @@ package yuanxin.knowledge.crawler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import yuanxin.knowledge.crawler.util.CrawlerUtil;
 import yuanxin.knowledge.crawler.util.ImportBackupUtil;
-import yuanxin.knowledge.crawler.util.ImportUtil;
-
-import java.util.List;
 
 @SpringBootTest
 class KnowledgeCrawlerApplicationTests {

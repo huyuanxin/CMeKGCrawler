@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.util.List;
 
 @Component
-public class ImportBackupUtil {
+public class ImportEntityUtil {
 
     //疾病
     final DiseaseRepository diseaseRepository;
@@ -61,7 +61,7 @@ public class ImportBackupUtil {
     final CheckSubjectRepository checkSubjectRepository;
 
 
-    public ImportBackupUtil(DiseaseRepository diseaseRepository,
+    public ImportEntityUtil(DiseaseRepository diseaseRepository,
                             SymptomRepository symptomRepository,
                             EntityRepository entityRepository,
                             PathologicalTypeRepository pathologicalTypeRepository,
@@ -542,7 +542,7 @@ public class ImportBackupUtil {
         List<String> diseaseNameList = CrawlerUtil.getNameList("疾病");
         for (String disease : diseaseNameList
         ) {
-            if (diseaseRepository.isExits(disease) < 1) {
+            if (symptomRepository.isExits(disease) < 1) {
                 try {
                     diseaseRepository.insertDisease(disease);
                     System.out.println("插入:" + disease + "进入neo4j的Disease");
@@ -558,7 +558,7 @@ public class ImportBackupUtil {
         List<String> symptomNameList = CrawlerUtil.getNameList("症状");
         for (String symptom : symptomNameList
         ) {
-            if (symptomRepository.isExits(symptom) < 1) {
+            if (diseaseRepository.isExits(symptom) < 1) {
                 try {
                     symptomRepository.insertSymptom(symptom);
                     System.out.println("插入:" + symptom + "进入neo4j的Symptom");
@@ -898,12 +898,14 @@ public class ImportBackupUtil {
                         if (treatmentRepository.isExits(treatmentPrograms) < 1) {
                             if (checkRepository.isExits(treatmentPrograms) < 1) {
                                 if (auxiliaryExaminationRepository.isExits(treatmentPrograms) < 1) {
-                                    if (treatmentProgramsRepository.isExits(treatmentPrograms) < 1) {
-                                        try {
-                                            treatmentProgramsRepository.insertTreatmentPrograms(treatmentPrograms);
-                                            System.out.println("插入:" + treatmentPrograms + "进入neo4j的Cause");
-                                        } catch (Exception e) {
-                                            System.out.println("插入失败");
+                                    if (operationRepository.isExits(treatmentPrograms) < 1) {
+                                        if (treatmentProgramsRepository.isExits(treatmentPrograms) < 1) {
+                                            try {
+                                                treatmentProgramsRepository.insertTreatmentPrograms(treatmentPrograms);
+                                                System.out.println("插入:" + treatmentPrograms + "进入neo4j的Cause");
+                                            } catch (Exception e) {
+                                                System.out.println("插入失败");
+                                            }
                                         }
                                     }
                                 }

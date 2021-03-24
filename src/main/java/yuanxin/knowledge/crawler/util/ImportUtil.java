@@ -18,10 +18,10 @@ public class ImportUtil {
     final SymptomRepository symptomRepository;
     final TreatmentRepository treatmentRepository;
     final EntityRepository entityRepository;
-    final RelationRepository relationRepository;
+    final DiseaseRelationRepository relationRepository;
 
     @Autowired
-    public ImportUtil(DiseaseRepository diseaseRepository, DrugRepository drugRepository, SymptomRepository symptomRepository, TreatmentRepository treatmentRepository, EntityRepository entityRepository, RelationRepository relationRepository) {
+    public ImportUtil(DiseaseRepository diseaseRepository, DrugRepository drugRepository, SymptomRepository symptomRepository, TreatmentRepository treatmentRepository, EntityRepository entityRepository, DiseaseRelationRepository relationRepository) {
         this.diseaseRepository = diseaseRepository;
         this.drugRepository = drugRepository;
         this.symptomRepository = symptomRepository;
@@ -163,19 +163,21 @@ public class ImportUtil {
         insertAllComplication();
     }
 
-    void foo(String diseaseName, String name) {
+    void insertRelComplicationInDisease(String diseaseName, String name) {
         if (diseaseRepository.isExits(name) > 0) {
-            relationRepository.insertResComplication(diseaseName, name);
+            relationRepository.insertRelComplicationDTD(diseaseName, name);
         } else if (symptomRepository.isExits(name) > 0) {
-            // another insert function
+            relationRepository.insertRelComplicationDTS(diseaseName, name);
+        } else if (entityRepository.isExits(name) > 0) {
+            relationRepository.insertRelComplicationDTC(diseaseName, name);
         }
     }
 
-    void bar() {
+    void getRelComplicationInDisease() {
         HashMap<String, List<String>> map = new CrawlerUtil().getDiseaseJsonComponentToHashMap("疾病", "并发症");
         for (String key : map.keySet()
         ) {
-            map.get(key).forEach(it -> foo(key, it));
+            map.get(key).forEach(it -> insertRelComplicationInDisease(key, it));
         }
     }
 }

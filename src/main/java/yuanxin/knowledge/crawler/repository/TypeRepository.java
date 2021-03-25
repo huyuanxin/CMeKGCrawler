@@ -12,17 +12,17 @@ public interface TypeRepository extends Neo4jRepository<Object, Integer> {
     void initType();
 
     /**
-     * 插入诊疗
+     * 插入分类
      *
-     * @param typeName 名称
+     * @param typeName 分类名称
      */
     @Query("CREATE (t:Type) SET t.name= $typeName")
     void insertType(@Param("typeName") String typeName);
 
     /**
-     * 返回特点名称诊疗的数量,作为是否存在的判断
+     * 返回特点名称分类的数量,作为是否存在的判断
      *
-     * @param typeName 诊疗名称
+     * @param typeName 分类名称
      * @return 存在的数量
      */
     @Query("match(t:Type) where t.name=$typeName return COUNT(*)")

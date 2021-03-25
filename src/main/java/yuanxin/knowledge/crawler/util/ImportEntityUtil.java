@@ -957,12 +957,16 @@ public class ImportEntityUtil {
         List<String> checkNameList = CrawlerUtil.getDiseaseJsonComponent("症状", "检查");
         for (String check : checkNameList
         ) {
-            if (checkRepository.isExits(check) < 1) {
-                try {
-                    checkRepository.insertCheck(check);
-                    System.out.println("插入:" + check + "进入neo4j的Check");
-                } catch (Exception e) {
-                    System.out.println("插入失败");
+            if (auxiliaryExaminationRepository.isExits(check) < 1) {
+                if (checkSubjectRepository.isExits(check) < 1) {
+                    if (checkRepository.isExits(check) < 1) {
+                        try {
+                            checkRepository.insertCheck(check);
+                            System.out.println("插入:" + check + "进入neo4j的Check");
+                        } catch (Exception e) {
+                            System.out.println("插入失败");
+                        }
+                    }
                 }
             }
         }
@@ -1144,12 +1148,14 @@ public class ImportEntityUtil {
         for (String auxiliaryExamination : auxiliaryExaminationNameList
         ) {
             if (checkRepository.isExits(auxiliaryExamination) < 1) {
-                if (auxiliaryExaminationRepository.isExits(auxiliaryExamination) < 1) {
-                    try {
-                        auxiliaryExaminationRepository.insertAuxiliaryExamination(auxiliaryExamination);
-                        System.out.println("插入:" + auxiliaryExamination + "进入neo4j的Complication");
-                    } catch (Exception e) {
-                        System.out.println("插入失败");
+                if (checkSubjectRepository.isExits(auxiliaryExamination) < 1) {
+                    if (auxiliaryExaminationRepository.isExits(auxiliaryExamination) < 1) {
+                        try {
+                            auxiliaryExaminationRepository.insertAuxiliaryExamination(auxiliaryExamination);
+                            System.out.println("插入:" + auxiliaryExamination + "进入neo4j的Complication");
+                        } catch (Exception e) {
+                            System.out.println("插入失败");
+                        }
                     }
                 }
             }

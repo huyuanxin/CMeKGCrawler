@@ -250,6 +250,16 @@ public interface DiseaseRelationRepository extends Neo4jRepository<Object, Integ
     @Query("Match(d:Disease),(a:AuxiliaryExamination) where d.name=$diseaseName AND a.name=$auxiliaryExaminationName Create (d)-[treatmentPrograms]->(a)")
     void insertRelTreatmentProgramsDTE(@Param("diseaseName") String diseaseName, @Param("auxiliaryExaminationName") String auxiliaryExaminationName);
 
+    /**
+     * 插入治疗方案关系
+     *
+     * @param diseaseName           疾病名
+     * @param treatmentProgramsName 治疗方案名
+     */
+    @Query("Match(d:Disease),(tp:TreatmentPrograms) where d.name=$diseaseName AND tp.name=$treatmentProgramsName Create (d)-[treatmentPrograms]->(tp)")
+    void insertRelTreatmentProgramsDTTP(@Param("diseaseName") String diseaseName, @Param("treatmentProgramsName") String treatmentProgramsName);
+
+
 //临床症状及体征
 
     /**
@@ -271,7 +281,7 @@ public interface DiseaseRelationRepository extends Neo4jRepository<Object, Integ
     void insertRelSymptomAndSignDTS(@Param("diseaseName") String diseaseName, @Param("symptomName") String symptomName);
 
     /**
-     * 插入并发症实体并发症
+     * 插入临床症状及体征实体 临床症状及体征
      *
      * @param diseaseName        疾病名
      * @param symptomAndSignName 临床症状及体征实体 临床症状及体征名

@@ -16,7 +16,7 @@ public interface PrecautionsRepository extends Neo4jRepository<Object, Integer> 
      *
      * @param precautionsName 名称
      */
-    @Query("CREATE (t:Precautions) SET t.name= $precautionsName")
+    @Query("CREATE (p:Precautions) SET p.name= $precautionsName")
     void insertPrecautions(@Param("precautionsName") String precautionsName);
 
     /**
@@ -25,6 +25,6 @@ public interface PrecautionsRepository extends Neo4jRepository<Object, Integer> 
      * @param precautionsName 注意事项名称
      * @return 存在的数量
      */
-    @Query("match(t:Precautions) where t.name=$precautionsName return COUNT(*)")
+    @Query("match(p:Precautions) where p.name=$precautionsName return COUNT(*)")
     long isExits(@Param("precautionsName") String precautionsName);
 }

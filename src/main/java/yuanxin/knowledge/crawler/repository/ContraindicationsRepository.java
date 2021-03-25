@@ -14,9 +14,9 @@ public interface ContraindicationsRepository extends Neo4jRepository<Object, Int
     /**
      * 插入禁忌证
      *
-     * @param contraindicationsName 名称
+     * @param contraindicationsName 禁忌证名称
      */
-    @Query("CREATE (t:Contraindications) SET t.name= $contraindicationsName")
+    @Query("CREATE (c:Contraindications) SET c.name= $contraindicationsName")
     void insertContraindications(@Param("contraindicationsName") String contraindicationsName);
 
     /**
@@ -25,6 +25,6 @@ public interface ContraindicationsRepository extends Neo4jRepository<Object, Int
      * @param contraindicationsName 禁忌证名称
      * @return 存在的数量
      */
-    @Query("match(t:Contraindications) where t.name=$contraindicationsName return COUNT(*)")
+    @Query("match(c:Contraindications) where c.name=$contraindicationsName return COUNT(*)")
     long isExits(@Param("contraindicationsName") String contraindicationsName);
 }

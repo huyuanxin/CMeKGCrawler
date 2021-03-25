@@ -17,7 +17,7 @@ public interface RelatedDiseaseRepository extends Neo4jRepository<Object, Intege
      * @param relatedDiseaseName 相关疾病的名字
      * @return 个数
      */
-    @Query("match(c:RelatedDisease) where c.name=$relatedDiseaseName return COUNT(*)")
+    @Query("match(r:RelatedDisease) where r.name=$relatedDiseaseName return COUNT(*)")
     long isExits(@Param("relatedDiseaseName") String relatedDiseaseName);
 
     /**
@@ -26,6 +26,6 @@ public interface RelatedDiseaseRepository extends Neo4jRepository<Object, Intege
      * @param relatedDiseaseName 相关疾病的名字
      * @return 结果
      */
-    @Query("CREATE (c:RelatedDisease) SET c.name= $relatedDiseaseName")
+    @Query("CREATE (r:RelatedDisease) SET r.name= $relatedDiseaseName")
     void insertRelatedDisease(@Param("relatedDiseaseName") String relatedDiseaseName);
 }

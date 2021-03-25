@@ -20,11 +20,11 @@ public interface SubjectRepository extends Neo4jRepository<Object, Integer> {
     void insertSubject(@Param("subjectName") String subjectName);
 
     /**
-     * 返回特点名称注意事项的数量,作为是否存在的判断
+     * 返回特点名称所属科目的数量,作为是否存在的判断
      *
      * @param subjectName 所属科目名称
      * @return 存在的数量
      */
-    @Query("match(t:Subject) where t.name=$subjectName return COUNT(*)")
+    @Query("match(s:Subject) where s.name=$subjectName return COUNT(*)")
     long isExits(@Param("subjectName") String subjectName);
 }

@@ -3,15 +3,15 @@ package yuanxin.knowledge.crawler.util;
 import org.springframework.stereotype.Component;
 import yuanxin.knowledge.crawler.repository.*;
 
-import javax.swing.*;
 import java.util.List;
 
 @Component
 public class ImportEntityUtil {
 
-    //疾病
+    // 疾病
     final DiseaseRepository diseaseRepository;
-    final EntityRepository entityRepository;//并发症
+    // 并发症
+    final EntityRepository entityRepository;
     final SymptomRepository symptomRepository;
 
     final PathologicalTypeRepository pathologicalTypeRepository;

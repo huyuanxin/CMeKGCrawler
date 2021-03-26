@@ -297,7 +297,7 @@ public interface DiseaseRelationRepository extends Neo4jRepository<Object, Integ
      * @param diseaseName   疾病名
      * @param prognosisName 预后状况实体 预后状况名
      */
-    @Query("Match(d:Disease),(p:Prognosis) where da.name=$diseaseName AND p.name=$prognosisName Create (d)-[:prognosis]->(p)")
+    @Query("Match(d:Disease),(p:Prognosis) where d.name=$diseaseName AND p.name=$prognosisName Create (d)-[:prognosis]->(p)")
     void insertRelPrognosis(@Param("diseaseName") String diseaseName, @Param("prognosisName") String prognosisName);
 
     //发病率

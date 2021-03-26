@@ -33,7 +33,7 @@ spring.data.neo4j.password=password
 
 ### Run Application
 
-* Run CollegeCrawlerApplication.java
+* Run KnowledgeCrawlerApplication.java.java
 
 # References
 

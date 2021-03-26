@@ -1,8 +1,13 @@
 package yuanxin.knowledge.crawler;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import yuanxin.knowledge.crawler.util.ImportEntityUtil;
+import yuanxin.knowledge.crawler.util.ImportRelationUtil;
 import yuanxin.knowledge.crawler.util.SaveFileUtil;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author huyuanxin
@@ -10,22 +15,29 @@ import yuanxin.knowledge.crawler.util.SaveFileUtil;
 @SpringBootApplication
 public class KnowledgeCrawlerApplication {
 
+    final ImportEntityUtil importEntityUtil;
+    final ImportRelationUtil importRelationUtil;
+
+    static ImportEntityUtil staticImportEntityUtil = null;
+    static ImportRelationUtil staticImportRelationUtil = null;
+
+    @Autowired
+    public KnowledgeCrawlerApplication(ImportEntityUtil importEntityUtil, ImportRelationUtil importRelationUtil) {
+        this.importEntityUtil = importEntityUtil;
+        this.importRelationUtil = importRelationUtil;
+    }
+
+    @PostConstruct
+    void init() {
+        staticImportEntityUtil = importEntityUtil;
+        staticImportRelationUtil = importRelationUtil;
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(KnowledgeCrawlerApplication.class, args);
-        saveAll();
-    }
-
-    private static void saveOneByOne() {
-        SaveFileUtil.saveFile("疾病");
-        SaveFileUtil.saveFile("药物");
-        SaveFileUtil.saveFile("症状");
-        SaveFileUtil.saveFile("诊疗");
-    }
-
-    private static void saveAll() {
-        SaveFileUtil.saveAll("疾病");
-        SaveFileUtil.saveAll("药物");
-        SaveFileUtil.saveAll("症状");
-        SaveFileUtil.saveAll("诊疗");
+        SaveFileUtil.saveAllToJson();
+        staticImportEntityUtil.init();
+        staticImportEntityUtil.insertAll();
+        staticImportRelationUtil.insertAllRelation();
     }
 }

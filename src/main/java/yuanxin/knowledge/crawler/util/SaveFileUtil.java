@@ -16,6 +16,11 @@ import java.util.List;
  */
 public class SaveFileUtil {
 
+    public static final String DISEASE = "疾病";
+    public static final String DRUG = "药物";
+    public static final String SYMPTOM = "症状";
+    public static final String TREATMENT = "诊疗";
+
     public static boolean saveFile(String type) {
         boolean result = false;
         List<String> nameList = CrawlerUtil.getNameList(type);
@@ -86,5 +91,20 @@ public class SaveFileUtil {
             e.printStackTrace();
             return flag;
         }
+    }
+
+
+    public static void saveOneByOne() {
+        SaveFileUtil.saveFile(DISEASE);
+        SaveFileUtil.saveFile(DRUG);
+        SaveFileUtil.saveFile(SYMPTOM);
+        SaveFileUtil.saveFile(TREATMENT);
+    }
+
+    public static void saveAllToJson() {
+        SaveFileUtil.saveAll(DISEASE);
+        SaveFileUtil.saveAll(DRUG);
+        SaveFileUtil.saveAll(SYMPTOM);
+        SaveFileUtil.saveAll(TREATMENT);
     }
 }

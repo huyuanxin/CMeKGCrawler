@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 @SpringBootTest
-class KnowledgeCrawlerApplicationTests {
+class
+KnowledgeCrawlerApplicationTests {
 
     //    @Autowired
 //    ImportUtil importUtil;

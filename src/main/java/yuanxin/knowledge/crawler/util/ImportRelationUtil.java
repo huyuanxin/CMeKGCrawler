@@ -1,11 +1,13 @@
 package yuanxin.knowledge.crawler.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import yuanxin.knowledge.crawler.repository.*;
 
 import java.util.HashMap;
 import java.util.List;
 
+@Component
 public class ImportRelationUtil {
 
 
@@ -1136,10 +1138,64 @@ public class ImportRelationUtil {
         }
     }
 
+    public void insertAllRelation() {
+        //疾病
+        getRelComplicationInDisease();
+        getRelSymptomAndSignInDisease();
+        getRelPrognosisInDisease();
+        getRelDiseaseRateInDisease();
+        getRelDrugTherapyInDisease();
+        getRelAdjuvantTherapyInDisease();
+        getRelOperationInDisease();
+        getRelPathogenesisInDisease();
+        getRelPathologicalTypeInDisease();
+        getRelDiagnosisInDisease();
+        getRelPathophysiologyInDisease();
+        getRelDiseaseSiteInDisease();
+        getRelDepartmentInDisease();
+        getRelMultipleGroupsInDisease();
+        getRelCauseInDisease();
+        getRelPrognosticSurvivalTimeInDisease();
+        getRelHighRiskFactorsInDisease();
+        getRelRelatedDiseaseInDisease();
+        getRelRelatedSymptomInDisease();
+        getRelTreatmentProgramsInDisease();
+        //症状
+        getRelCheckInSymptom();
+        getRelDepartmentInSymptom();
+        getRelDiseaseSiteInSymptom();
+        getRelRelatedDiseaseInSymptom();
+        getRelRelatedSymptomInSymptom();
+        getRelPathologicalTypeInSymptom();
+        getRelAdjuvantTherapyInSymptom();
+        getRelInfectiousInSymptom();
+        getRelComplicationInSymptom();
+        getRelRelatedToInSymptom();
+        getRelSymptomAndSignInSymptom();
+        getRelAuxiliaryExaminationInSymptom();
+        getRelDrugTherapyInSymptom();
+        getRelStageInSymptom();
+        getRelMultipleGroupsInSymptom();
+        getRelCauseInDisease();
+        getRelTreatmentProgramsInSymptom();
+        getRelPreventionInSymptom();
+        getRelSpreadWayInSymptom();
 
+        //药物
+        getRelIngredientsInDrug();
+        getRelOTCInDrug();
+        getRelAdverseReactionsInDrug();
+        getRelIndicationsInDrug();
+        getRelTypeInDrug();
+        getRelPrecautionsInDrug();
+        getRelContraindicationsInDrug();
+        getRelSubjectInDrug();
 
-
-
+        //诊疗
+        getRelRelatedDiseaseInTreatment();
+        getRelRelatedSymptomInTreatment();
+        getRelCheckSubjectInTreatment();
+    }
 
 
 }

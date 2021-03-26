@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import yuanxin.knowledge.crawler.util.CrawlerUtil;
-import yuanxin.knowledge.crawler.util.ImportBackupUtil;
+import yuanxin.knowledge.crawler.util.ImportEntityUtil;
+import yuanxin.knowledge.crawler.util.ImportRelationUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,10 @@ class KnowledgeCrawlerApplicationTests {
     //    @Autowired
 //    ImportUtil importUtil;
     @Autowired
-    ImportBackupUtil importBackupUtil;
+    ImportEntityUtil importEntityUtil;
+
+    @Autowired
+    ImportRelationUtil importRelationUtil;
 
 //    @Test
 //    void init() {
@@ -35,8 +39,13 @@ class KnowledgeCrawlerApplicationTests {
 //    }
 
     @Test
-    void insertAllComplication() {
-        importBackupUtil.insertAll();
+    void insertAllEntity() {
+        importEntityUtil.insertAll();
+    }
+
+    @Test
+    void insertAllRelation() {
+        importRelationUtil.insertAllRelation();
     }
 
     @Test

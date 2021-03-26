@@ -870,7 +870,6 @@ public class ImportEntityUtil {
         for (String symptomAndSign : symptomAndSignNameList
         ) {
             if (diseaseRepository.isExits(symptomAndSign) < 1) {
-                System.out.println(diseaseRepository.isExits(symptomAndSign));
                 if (symptomRepository.isExits(symptomAndSign) < 1) {
                     try {
                         symptomAndSignRepository.insertSymptomAndSign(symptomAndSign);

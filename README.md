@@ -51,7 +51,7 @@ spring.data.neo4j.password=password
 
 # References
 
-If you used College Crawler in your research, please quote it in the following format:
+If you used Knowledge Crawler in your research, please quote it in the following format:
 
 ```
 @Software{CollegeCrawler,
@@ -64,8 +64,8 @@ If you used College Crawler in your research, please quote it in the following f
 
 # Disclaimers
 
-Please do not apply knowledge Crawler to any work that may violate the legal provisions and moral constraints. Please use
-College Crawler friendly, abide by the spider agreement, and do not use College Crawler for any illegal purpose. If you
-choose to use College Crawler, you will abide by this agreement. The author will not bear any legal risks and losses
+Please do not apply Knowledge Crawler to any work that may violate the legal provisions and moral constraints. Please use
+Knowledge Crawler friendly, abide by the spider agreement, and do not use Knowledge Crawler for any illegal purpose. If you
+choose to use Knowledge Crawler, you will abide by this agreement. The author will not bear any legal risks and losses
 caused by your violation of this agreement, and all consequences will be borne by you.
 

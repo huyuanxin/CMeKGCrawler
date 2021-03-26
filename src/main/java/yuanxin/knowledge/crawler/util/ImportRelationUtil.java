@@ -650,7 +650,7 @@ public class ImportRelationUtil {
         HashMap<String, List<String>> map = new CrawlerUtil().getDiseaseJsonComponentToHashMap("药物", "OTC类型");
         for (String key : map.keySet()
         ) {
-            map.get(key).forEach(it -> insertRelIngredientsInDrug(key, it));
+            map.get(key).forEach(it -> insertRelOTCInDrug(key, it));
         }
 
     }
@@ -1161,7 +1161,7 @@ public class ImportRelationUtil {
         getRelDrugTherapyInSymptom();
         getRelStageInSymptom();
         getRelMultipleGroupsInSymptom();
-        getRelCauseInDisease();
+        getRelCauseInSymptom();
         getRelTreatmentProgramsInSymptom();
         getRelPreventionInSymptom();
         getRelSpreadWayInSymptom();

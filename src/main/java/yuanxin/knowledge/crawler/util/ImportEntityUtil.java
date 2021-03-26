@@ -574,7 +574,6 @@ public class ImportEntityUtil {
         for (String complication : complicationNameList
         ) {
             if (diseaseRepository.isExits(complication) < 1) {
-                System.out.println(diseaseRepository.isExits(complication));
                 if (symptomRepository.isExits(complication) < 1) {
                     try {
                         entityRepository.insertComplication(complication);
@@ -622,7 +621,6 @@ public class ImportEntityUtil {
         for (String diagnosis : diagnosisNameList
         ){
             if (treatmentRepository.isExits(diagnosis) < 1) {
-                System.out.println(treatmentRepository.isExits(diagnosis));
                 if (diagnosisRepository.isExits(diagnosis) < 1) {
                     try {
                         diagnosisRepository.insertDiagnosis(diagnosis);
@@ -640,7 +638,6 @@ public class ImportEntityUtil {
         for (String pathophysiology : pathophysiologyNameList
         ){
             if (diseaseRepository.isExits(pathophysiology) < 1) {
-                System.out.println(diseaseRepository.isExits(pathophysiology));
                 if (symptomRepository.isExits(pathophysiology) < 1) {
                     try {
                         pathophysiologyRepository.insertPathophysiology(pathophysiology);
@@ -658,7 +655,6 @@ public class ImportEntityUtil {
         for (String diseaseSite : diseaseSiteNameList
         ){
             if (diseaseRepository.isExits(diseaseSite) < 1) {
-                System.out.println(diseaseRepository.isExits(diseaseSite));
                 if (symptomRepository.isExits(diseaseSite) < 1) {
                     try {
                         diseaseSiteRepository.insertDiseaseSite(diseaseSite);
@@ -706,7 +702,6 @@ public class ImportEntityUtil {
         for (String cause : causeNameList
         ){
             if (diseaseRepository.isExits(cause) < 1) {
-                System.out.println(diseaseRepository.isExits(cause));
                 if (causeRepository.isExits(cause) < 1) {
                     try {
                         causeRepository.insertCause(cause);
@@ -993,7 +988,6 @@ public class ImportEntityUtil {
         ){
             if (diseaseSiteRepository.isExits(diseaseSite) < 1) {
                 if (diseaseRepository.isExits(diseaseSite) < 1) {
-                    System.out.println(diseaseRepository.isExits(diseaseSite));
                     if (symptomRepository.isExits(diseaseSite) < 1) {
                         try {
                             diseaseSiteRepository.insertDiseaseSite(diseaseSite);
@@ -1094,7 +1088,6 @@ public class ImportEntityUtil {
         ) {
             if (entityRepository.isExits(complication) < 1) {
                 if (diseaseRepository.isExits(complication) < 1) {
-                    System.out.println(diseaseRepository.isExits(complication));
                     if (symptomRepository.isExits(complication) < 1) {
                         try {
                             entityRepository.insertComplication(complication);
@@ -1128,7 +1121,6 @@ public class ImportEntityUtil {
         for (String symptomAndSign : symptomAndSignNameList
         ) {
             if (diseaseRepository.isExits(symptomAndSign) < 1) {
-                System.out.println(diseaseRepository.isExits(symptomAndSign));
                 if (symptomRepository.isExits(symptomAndSign) < 1) {
                     if (symptomAndSignRepository.isExits(symptomAndSign) < 1) {
                         try {
@@ -1214,7 +1206,6 @@ public class ImportEntityUtil {
         for (String cause : causeNameList
         ){
             if (diseaseRepository.isExits(cause) < 1) {
-                System.out.println(diseaseRepository.isExits(cause));
                 if (causeRepository.isExits(cause) < 1) {
                     try {
                         causeRepository.insertCause(cause);

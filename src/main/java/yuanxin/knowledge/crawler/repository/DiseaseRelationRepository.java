@@ -337,7 +337,7 @@ public interface DiseaseRelationRepository extends Neo4jRepository<Object, Integ
      * @param diseaseName     疾病名
      * @param drugTherapyName 药物治疗实体 药物治疗名
      */
-    @Query("Match(d:Disease),(dr:DrugTherapy) where d.name=$diseaseName AND dt.name=$drugTherapyName Create (d)-[:drugTherapy]->(dt)")
+    @Query("Match(d:Disease),(dr:DrugTherapy) where d.name=$diseaseName AND dr.name=$drugTherapyName Create (d)-[:drugTherapy]->(dt)")
     void insertRelDrugTherapyDTDT(@Param("diseaseName") String diseaseName, @Param("drugTherapyName") String drugTherapyName);
 
     //辅助治疗

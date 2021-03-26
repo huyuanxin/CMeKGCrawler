@@ -36,8 +36,8 @@ public class KnowledgeCrawlerApplication {
     public static void main(String[] args) {
         SpringApplication.run(KnowledgeCrawlerApplication.class, args);
         // SaveFileUtil.saveAllToJson();
-        // staticImportEntityUtil.init();
-        // staticImportEntityUtil.insertAll();
+//        staticImportEntityUtil.init();
+//        staticImportEntityUtil.insertAll();
         staticImportRelationUtil.insertAllRelation();
     }
 }

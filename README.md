@@ -55,10 +55,10 @@ College Crawler friendly, abide by the spider agreement, and do not use College 
 choose to use College Crawler, you will abide by this agreement. The author will not bear any legal risks and losses
 caused by your violation of this agreement, and all consequences will be borne by you.
 
-# 关系
+# Relationship
 
-[疾病](./doc/疾病.md)
-[症状](./doc/症状.md)
-[药物](./doc/药物.md)
-[诊疗](./doc/诊疗.md)
+[DISEASE](./doc/疾病.md)
+[SYMPTOM](./doc/症状.md)
+[DRUG](./doc/药物.md)
+[TREATMENT](./doc/诊疗.md)
 

@@ -2,6 +2,20 @@
 
 CMekgCrawler
 
+# Describe
+
+The project includes 140000 entities and nearly 700000 relationships
+
+## Relationship
+
+[DISEASE](./doc/疾病.md)
+
+[SYMPTOM](./doc/症状.md)
+
+[DRUG](./doc/药物.md)
+
+[TREATMENT](./doc/诊疗.md)
+
 # Quick Start
 
 ## Dependencies
@@ -54,11 +68,4 @@ Please do not apply College Crawler to any work that may violate the legal provi
 College Crawler friendly, abide by the spider agreement, and do not use College Crawler for any illegal purpose. If you
 choose to use College Crawler, you will abide by this agreement. The author will not bear any legal risks and losses
 caused by your violation of this agreement, and all consequences will be borne by you.
-
-# Relationship
-
-[DISEASE](./doc/疾病.md)
-[SYMPTOM](./doc/症状.md)
-[DRUG](./doc/药物.md)
-[TREATMENT](./doc/诊疗.md)
 

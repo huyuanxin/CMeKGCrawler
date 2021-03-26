@@ -18,7 +18,7 @@ public interface HighRiskFactorsRepository extends Neo4jRepository<Object, Integ
      * @param highRiskFactorsName 高危因素的名字
      * @return 个数
      */
-    @Query("match(c:HighRiskFactors) where c.name=$prognosticSurvivalTimeName return COUNT(*)")
+    @Query("match(c:HighRiskFactors) where c.name=$highRiskFactorsName return COUNT(*)")
     long isExits(@Param("highRiskFactorsName") String highRiskFactorsName);
 
     /**

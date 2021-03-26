@@ -182,7 +182,7 @@ public interface SymptomRelationRepository extends Neo4jRepository<Object, Integ
      * @param symptomName        症状名
      * @param relatedDiseaseName 相关疾病名
      */
-    @Query("Match(sa:Symptom),(r:RelatedDisease) where s.name=$symptomName AND r.name=$relatedDiseaseName Create (s)-[:relatedDisease]->(r)")
+    @Query("Match(sa:Symptom),(r:RelatedDisease) where sa.name=$symptomName AND r.name=$relatedDiseaseName Create (s)-[:relatedDisease]->(r)")
     void insertRelRelatedDiseaseSTR(@Param("symptomName") String symptomName, @Param("relatedDiseaseName") String relatedDiseaseName);
 
     /**

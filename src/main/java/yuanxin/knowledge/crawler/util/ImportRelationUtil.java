@@ -7,13 +7,16 @@ import yuanxin.knowledge.crawler.repository.*;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author zhangtingting
+ * @author luhaoyi
+ */
 @Component
 public class ImportRelationUtil {
-
-
     //疾病
     final DiseaseRepository diseaseRepository;
-    final EntityRepository entityRepository;//并发症
+    //并发症
+    final EntityRepository entityRepository;
     final SymptomRepository symptomRepository;
 
     final PathologicalTypeRepository pathologicalTypeRepository;
@@ -67,7 +70,7 @@ public class ImportRelationUtil {
     final DrugRelationRepository drugRelationRepository;
     final TreatmentRelationRepository treatmentRelationRepository;
 
-
+    @Autowired
     public ImportRelationUtil(DiseaseRepository diseaseRepository,
                               SymptomRepository symptomRepository,
                               EntityRepository entityRepository,
@@ -167,24 +170,6 @@ public class ImportRelationUtil {
         this.drugRelationRepository = drugRelationRepository;
         this.treatmentRelationRepository = treatmentRelationRepository;
     }
-
-    //疾病
-    void initComplication() {
-        try {
-            entityRepository.initComplication();
-        } catch (Exception e) {
-            System.out.println("初始化失败，可能是约束已经存在");
-        }
-    }
-
-    void initDisease() {
-        try {
-            diseaseRepository.initDisease();
-        } catch (Exception e) {
-            System.out.println("初始化失败，可能是约束已经存在");
-        }
-    }
-
 
     //关系：疾病-并发症
     void insertRelComplicationInDisease(String diseaseName, String name) {

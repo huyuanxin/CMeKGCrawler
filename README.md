@@ -69,3 +69,8 @@ Knowledge Crawler friendly, abide by the spider agreement, and do not use Knowle
 choose to use Knowledge Crawler, you will abide by this agreement. The author will not bear any legal risks and losses
 caused by your violation of this agreement, and all consequences will be borne by you.
 
+# Database
+> 如果不想自己进行爬取,可以自行在此下载 <br>
+> 项目：https://github.com/huyuanxin/MKGS <br>
+> 链接：https://pan.baidu.com/s/1I9GG4zD2rULAKA6Mb365LQ 
+> 提取码：MKGS 

@@ -77,7 +77,7 @@ caused by your violation of this agreement, and all consequences will be borne b
 > 如果不想自己进行爬取,可以自行在此下载 <br>
 > 项目：https://github.com/huyuanxin/MKGS <br>
 > 链接：https://pan.baidu.com/s/1I9GG4zD2rULAKA6Mb365LQ 
-> 提取码：MKGS 
-> 适配Neo4j v5.2&Neo4j v4.4
+> 提取码：MKGS <br>
+> 适配Neo4j v5.2&Neo4j v4.4<br>
 > 链接: https://pan.baidu.com/s/1UPtlNCEtH2P05LgG1veFEw
 > 提取码: MKGS

@@ -78,3 +78,6 @@ caused by your violation of this agreement, and all consequences will be borne b
 > 项目：https://github.com/huyuanxin/MKGS <br>
 > 链接：https://pan.baidu.com/s/1I9GG4zD2rULAKA6Mb365LQ 
 > 提取码：MKGS 
+> 适配Neo4j v5.2&Neo4j v4.4
+> 链接: https://pan.baidu.com/s/1UPtlNCEtH2P05LgG1veFEw
+> 提取码: MKGS
